@@ -1,0 +1,6 @@
+SQL> COMMIT WORK
+  2  ;
+
+Commit complete.
+
+SQL> SPOOL OFF
