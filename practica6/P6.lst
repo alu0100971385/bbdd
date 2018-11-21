@@ -1,0 +1,270 @@
+SQL> SELECT SYSDATE
+  2  FROM DUAL;
+
+SYSDATE                                                                         
+---------                                                                       
+21-NOV-18                                                                       
+
+SQL> SELECT TIMESTAMP
+  2  FROM DUAL;
+SELECT TIMESTAMP
+       *
+ERROR at line 1:
+ORA-00904: "TIMESTAMP": invalid identifier 
+
+
+SQL> SELECT SYSTIMESTAMP
+  2  FROM DUAL;
+
+SYSTIMESTAMP                                                                    
+---------------------------------------------------------------------------     
+21-NOV-18 01.19.57.467365 PM +00:00                                             
+
+SQL> SELECT CURRENT_TIMESTAMP
+  2  FROM DUAL;
+
+CURRENT_TIMESTAMP                                                               
+---------------------------------------------------------------------------     
+21-NOV-18 01.20.55.549783 PM +00:00                                             
+
+SQL> SELECT TO_CHAR(SYSDATE, 'HH:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+01:24:18                                                                        
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DDD')
+  2  FROM DUAL;
+
+TO_                                                                             
+---                                                                             
+325                                                                             
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSDATE,'DAY')                                                          
+------------------------------------                                            
+WEDNESDAY                                                                       
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY:DD:MONTH:YEAR')
+  2  FROM DUAL;
+
+TO_CHAR(SYSDATE,'DAY:DD:MONTH:YEAR')                                            
+--------------------------------------------------------------------------------
+WEDNESDAY:21:NOVEMBER :TWENTY EIGHTEEN                                          
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY:DD:MONTH:YYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSDATE,'DAY:DD:MONTH:YYY')                                             
+--------------------------------------------------------------------------------
+WEDNESDAY:21:NOVEMBER :018                                                      
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY:DD:MONTH:YYYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSDATE,'DAY:DD:MONTH:YYYY')                                            
+--------------------------------------------------------------------------------
+WEDNESDAY:21:NOVEMBER :2018                                                     
+
+SQL> LISTO JEJE
+SP2-0042: unknown command "LISTO JEJE" - rest of line ignored.
+SQL> SELECT TO_CHAR(SYSDATE, 'HH24:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+13:27:46                                                                        
+
+SQL> SELECT (TO_CHAR(SYSDATE, 'DD:MM:YY') FROM DUAL) - '01-12-2017';
+SELECT (TO_CHAR(SYSDATE, 'DD:MM:YY') FROM DUAL) - '01-12-2017'
+                                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT (TO_CHAR(SYSDATE, 'DD:MM:YY') FROM DUAL) - '01-12-17';
+SELECT (TO_CHAR(SYSDATE, 'DD:MM:YY') FROM DUAL) - '01-12-17'
+                                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT (TO_CHAR(SYSDATE, 'DD:MM:YY') FROM DUAL) - '01:12:17';
+SELECT (TO_CHAR(SYSDATE, 'DD:MM:YY') FROM DUAL) - '01:12:17'
+                                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DD:MM:YY') - '01:12:17'
+  2  FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'DD:MM:YY') - '01:12:17'
+       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DD:MM:YY') - '01-12-17'
+  2  FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'DD:MM:YY') - '01-12-17'
+       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT SYSDATE - '01-12-17'
+  2  FROM DUAL;
+SELECT SYSDATE - '01-12-17'
+                 *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT DATEDIFF(day, SYSDATE, '01-12-17');
+SELECT DATEDIFF(day, SYSDATE, '01-12-17')
+                                        *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT DATEDIFF(day, SYSDATE, '01-12-17');
+SELECT DATEDIFF(day, SYSDATE, '01-12-17')
+                                        *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT DATEDIFF(day, SYSDATE, '01-12-17')
+  2  FROM DUAL;
+SELECT DATEDIFF(day, SYSDATE, '01-12-17')
+       *
+ERROR at line 1:
+ORA-00904: "DATEDIFF": invalid identifier 
+
+
+SQL> SELECT SYSDATE - FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE (CAS = 11) AND (DNI = 8888);
+
+SYSDATE-FI                                                                      
+----------                                                                      
+3368.56881                                                                      
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DNI
+  4  
+SQL> 
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DISTINCT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE (SYSDATE - FI > 365));
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+CARLOS                                                                          
+PEDRO                                                                           
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+ANGELA                                                                          
+DAVID                                                                           
+SOLEDAD                                                                         
+
+P                                                                               
+------------------------------------------------------------                    
+JOSE MANUEL                                                                     
+
+12 rows selected.
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DISTINCT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE (SYSDATE - FI) > 365);
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+CARLOS                                                                          
+PEDRO                                                                           
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+ANGELA                                                                          
+DAVID                                                                           
+SOLEDAD                                                                         
+
+P                                                                               
+------------------------------------------------------------                    
+JOSE MANUEL                                                                     
+
+12 rows selected.
+
+SQL> SELECT DISTINCT DNI
+  2  FROM PLAN_DOCENTE
+  3  WHERE
+  4  
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DISTINCT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE (FF - FI) > 365);
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+MARIA                                                                           
+CARMEN                                                                          
+DAVID                                                                           
+
+SQL> SELECT PINGA
+  2  
+SQL> 
+SQL> SELECT P
+  2  
+SQL> 
+SQL> SELECT DISTINCT DNI
+  2  FROM (SELECT DNI
+  3  FROM PLAN_DOCENTE
+  4  WHERE (SYSDATE - FI) > 365),(SELECT DNI
+  5  
+SQL> 
+SQL> SELECT DISTINCT DNI
+  2  FROM (SELECT DNI
+  3  FROM PLAN_DOCENTE
+  4  WHERE (SYSDATE - FI) > 365) - (SELECT DNI
+  5  FROM PLAN_DOCENTE
+  6  WHERE (FF - FI) > 365);
+WHERE (SYSDATE - FI) > 365) - (SELECT DNI
+                            *
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT DISTINCT DNI
+  2  FROM (SELECT DNI
+  3  FROM PLAN_DOCENTE
+  4  WHERE (SYSDATE - FI) > 365) - (SELECT DNI FROM PLAN_DOCENTE WHERE (FF - FI) > 365);
+WHERE (SYSDATE - FI) > 365) - (SELECT DNI FROM PLAN_DOCENTE WHERE (FF - FI) > 365)
+                            *
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT DISTINCT DNI
+  2  FROM (SELECT DNI
+  3  FROM PLAN_DOCENTE
+  4  
+SQL> 
+SQL> 
+SQL> SPOOL OFF
