@@ -441,3 +441,108 @@ SQL> SELECT P
   5  WHERE
   6  
 SQL> SPOOL OFF
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (DISTINCT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE (FF IS NULL) AND (SYSDATE - FI > 365))
+  6  UNION
+  7  SELECT P
+  8  FROM PROFESOR
+  9  WHERE DNI IN (DISTINCT DNI
+ 10  FROM PLAN_DOCENTE
+ 11  WHERE (FF IS NOT NULL) AND (FF - FI > 365));
+WHERE DNI IN (DISTINCT DNI
+              *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DISTINCT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE (FF IS NULL) AND (SYSDATE - FI > 365))
+  6  UNION
+  7  SELECT P
+  8  FROM PROFESOR
+  9  WHERE DNI IN (SELECT DISTINCT DNI
+ 10  FROM PLAN_DOCENTE
+ 11  WHERE (FF IS NOT NULL) AND (FF - FI > 365));
+
+P                                                                               
+------------------------------------------------------------                    
+ANGELA                                                                          
+CARLOS                                                                          
+CARMEN                                                                          
+DAVID                                                                           
+FRANCISCO                                                                       
+IVAN                                                                            
+JOSE MANUEL                                                                     
+JUAN                                                                            
+MARIA                                                                           
+MARIO                                                                           
+PEDRO                                                                           
+
+P                                                                               
+------------------------------------------------------------                    
+SOLEDAD                                                                         
+
+12 rows selected.
+
+SQL> SELECT COUNT(P)
+  2  FROM PROFESOR
+  3  WHERE CAR IN (SELECT DISTINCT CAR
+  4  FROM AREA
+  5  WHERE CD IN (SELECT CD
+  6  FROM DEPARTAMENTO
+  7  WHERE D = 'ASTROFISICA'));
+
+  COUNT(P)                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> SELECT D, COUNT(P)
+  2  FROM DEPARTAMENTO D1, PROFESOR
+  3  WHERE CAR IN (SELECT CAR
+  4  FROM AREA
+  5  WHERE CD IN (SELECT CD
+  6  FROM DEPARTAMENTO D2
+  7  WHERE D1.D = D2.D));
+SELECT D, COUNT(P)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT D, COUNT(P)
+  2  FROM DEPARTAMENTO D1, PROFESOR
+  3  WHERE PROFESOR.CAR IN (SELECT CAR
+  4  FROM AREA
+  5  WHERE CD IN (SELECT CD
+  6  FROM DEPARTAMENTO D2
+  7  WHERE D1.D = D2.D));
+SELECT D, COUNT(P)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT D, COUNT(DNI)
+  2  FROM PROFESOR PR, DEPARTAMENTO DE, AREA ARE
+  3  WHERE (PR.CAR = ARE.CAR) AND (DE.CD = ARE.CD)
+  4  GROUP BY D
+  5  ORDER BY D ASC;
+
+D                                                            COUNT(DNI)         
+------------------------------------------------------------ ----------         
+ANALISIS MATEMATICO                                                   3         
+ASTROFISICA                                                           1         
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                    7         
+MATEMATICA FUNDAMENTAL                                                1         
+
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> SPOOL OFF;
