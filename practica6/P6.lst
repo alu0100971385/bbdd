@@ -268,3 +268,176 @@ SQL> SELECT DISTINCT DNI
 SQL> 
 SQL> 
 SQL> SPOOL OFF
+SQL> SELECT DISTINCT DNI
+  2  FROM PLAN_DOCENTE
+  3  WHERE (FF-FI > 365)
+  4  MINUS
+  5  SELECT DISTINCT DNI
+  6  FROM PLAN_DOCENTE
+  7  WHERE(SYSDATE-FI > 365);
+
+no rows selected
+
+SQL> SELECT DISTINCT DNI
+  2  FROM PLAN_DOCENTE
+  3  WHERE(SYSDATE-FI > 365);
+
+       DNI                                                                      
+----------                                                                      
+      1010                                                                      
+      1111                                                                      
+      2020                                                                      
+      2222                                                                      
+      3030                                                                      
+      3333                                                                      
+      4444                                                                      
+      5555                                                                      
+      6666                                                                      
+      7777                                                                      
+      8888                                                                      
+
+       DNI                                                                      
+----------                                                                      
+      9999                                                                      
+
+12 rows selected.
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DISTINCT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE (SYSDATE-FI > 365)
+  6  MINUS
+  7  SELECT DISTINCT DNI
+  8  FROM PLAN_DOCENTE
+  9  WHERE (FF-FI < 365));
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+PEDRO                                                                           
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+ANGELA                                                                          
+SOLEDAD                                                                         
+JOSE MANUEL                                                                     
+
+10 rows selected.
+
+SQL> PORFIN
+SP2-0042: unknown command "PORFIN" - rest of line ignored.
+SQL> ESEERAEL6
+SP2-0042: unknown command "ESEERAEL6" - rest of line ignored.
+SQL> SELECT COUNT DISTINCT DNI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS IN (SELECT CAS
+  4  FROM ASIGNATURA
+  5  WHERE CAR IN (SELECT CAR
+  6  FROM AREA
+  7  WHERE CD IN (SELECT CD
+  8  FROM DEPARTAMENTO
+  9  WHERE D = 'ASTROFISICA')));
+SELECT COUNT DISTINCT DNI
+             *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT *
+  2  FROM PROFESOR;
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      1111 JUAN                                                                 
+         6 CU                                                                   
+                                                                                
+      2222 CARLOS                                                               
+         7 TU                                                                   
+                                                                                
+      3333 PEDRO                                                                
+         4 TEU                                                                  
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      4444 MARIA                                                                
+         7 TU                                                                   
+                                                                                
+      5555 IVAN                                                                 
+         1 CEU                                                                  
+                                                                                
+      6666 CARMEN                                                               
+         3 CD                                                                   
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      7777 MARIO                                                                
+         2 TU                                                                   
+                                                                                
+      8888 FRANCISCO                                                            
+         5 TU                                                                   
+                                                                                
+      9999 ANGELA                                                               
+         8 TEU                                                                  
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      1010 DAVID                                                                
+         4 TU                                                                   
+                                                                                
+      2020 SOLEDAD                                                              
+         7 CU                                                                   
+                                                                                
+      3030 JOSE MANUEL                                                          
+         6 TEU                                                                  
+                                                                                
+
+12 rows selected.
+
+SQL> SELECT COUNT(DNI)
+  2  FROM PROFESOR
+  3  WHERE CAR IN (SELECT CAR
+  4  FROM AREA
+  5  WHERE CD IN (SELECT CD
+  6  FROM DEPARTAMENTO
+  7  WHERE D = 'ASTROFISICA'));
+
+COUNT(DNI)                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> lsito
+SP2-0042: unknown command "lsito" - rest of line ignored.
+SQL> SELECT D,COUNT(DNI)
+  2  FROM DEPARTAMENTO D1, PROFESOR
+  3  WHERE PROFESOR.CAR IN (SELECT CAR
+  4  FROM AREA
+  5  WHERE CD IN (SELECT CD
+  6  FROM DEPARTAMENTO D2
+  7  WHERE D1.D = D2.D));
+SELECT D,COUNT(DNI)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DISTINCT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE
+  6  
+SQL> SPOOL OFF
