@@ -546,3 +546,40 @@ SQL> COMMIT WORK;
 Commit complete.
 
 SQL> SPOOL OFF;
+SQL> SELECT DISTINCT AR, AVG(COUNT(A))
+  2  FROM ASIGNATURA,AREA
+  3  WHERE ASIGNATURA.CAR = AREA.CAR
+  4  GROUP BY AREA.AR;
+SELECT DISTINCT AR, AVG(COUNT(A))
+                *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT DISTINCT AR, COUNT(CAS)
+  2  FROM ASIGNATURA,AREA
+  3  WHERE ASIGNATURA.CAR = AREA.CAR
+  4  GROUP BY AR;
+
+AR                                                           COUNT(CAS)         
+------------------------------------------------------------ ----------         
+ALGEBRA                                                               1         
+ASTRONOMIA Y ASTROFISICA                                              1         
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                  2         
+ANALISIS MATEMATICO                                                   1         
+ESTADISTICA E INVESTIGACION OPERATIVA                                 1         
+DIDACTICA DE LA MATEMATICA                                            1         
+LENGUAJES Y SISTEMAS INFORMATICOS                                     4         
+MATEMATICA APLICADA                                                   1         
+
+8 rows selected.
+
+SQL> FALTA HACER LA MEDIA DE TODAS ESAS ASIGNATURAS
+SP2-0734: unknown command beginning "FALTA HACE..." - rest of line ignored.
+SQL> SE ME OLVIDO HACER EL APPEND
+SP2-0734: unknown command beginning "SE ME OLVI..." - rest of line ignored.
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> SPOOL OFF
