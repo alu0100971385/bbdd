@@ -1,0 +1,130 @@
+SQL> GRANT CREATE SYNONYM, CREATE VIEW
+  2  TO alu0100971385
+  3  ;
+
+Grant succeeded.
+
+SQL> SPOOL OFF
+SQL> SELECT TABLE_NAME, CONSTRAINT NAME
+  2  FROM USER_CONSTRAINTS;
+SELECT TABLE_NAME, CONSTRAINT NAME
+                   *
+ERROR at line 1:
+ORA-00904: "CONSTRAINT": invalid identifier 
+
+
+SQL> SELECT TABLE_NAME, CONSTRAINT_NAME
+  2  FROM USER_CONSTRAINTS;
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+AREA                                                                            
+SYS_C0075446                                                                    
+                                                                                
+PROFESOR                                                                        
+SYS_C0075448                                                                    
+                                                                                
+ASIGNATURA                                                                      
+SYS_C0075453                                                                    
+                                                                                
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+PLAN_DOCENTE                                                                    
+SYS_C0075457                                                                    
+                                                                                
+PLAN_DOCENTE                                                                    
+SYS_C0075456                                                                    
+                                                                                
+BIN$ehQIoM8QVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8LVuvgUwIAEazClg==$0                                                  
+                                                                                
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+BIN$ehQIoM8QVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8MVuvgUwIAEazClg==$0                                                  
+                                                                                
+BIN$ehQIoM8QVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8NVuvgUwIAEazClg==$0                                                  
+                                                                                
+BIN$ehQIoM8HVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8EVuvgUwIAEazClg==$0                                                  
+                                                                                
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+ASIGNATURA                                                                      
+SYS_C0075449                                                                    
+                                                                                
+ASIGNATURA                                                                      
+SYS_C0075450                                                                    
+                                                                                
+ASIGNATURA                                                                      
+SYS_C0075451                                                                    
+                                                                                
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+PLAN_DOCENTE                                                                    
+SYS_C0075454                                                                    
+                                                                                
+BIN$ehQIoM8WVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8UVuvgUwIAEazClg==$0                                                  
+                                                                                
+BIN$ehQIoM8TVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8RVuvgUwIAEazClg==$0                                                  
+                                                                                
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+BIN$ehQIoM8KVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8IVuvgUwIAEazClg==$0                                                  
+                                                                                
+BIN$ehQIoM8QVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8OVuvgUwIAEazClg==$0                                                  
+                                                                                
+BIN$ehQIoM8HVuvgUwIAEazClg==$0                                                  
+BIN$ehQIoM8FVuvgUwIAEazClg==$0                                                  
+                                                                                
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+DEPARTAMENTO                                                                    
+SYS_C0075444                                                                    
+                                                                                
+AREA                                                                            
+SYS_C0075445                                                                    
+                                                                                
+PROFESOR                                                                        
+SYS_C0075447                                                                    
+                                                                                
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+ASIGNATURA                                                                      
+SYS_C0075452                                                                    
+                                                                                
+PLAN_DOCENTE                                                                    
+SYS_C0075455                                                                    
+                                                                                
+
+23 rows selected.
+
+SQL> SPOOL OFF
