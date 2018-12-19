@@ -1,0 +1,542 @@
+SQL> SET SERVEROUTPUT ON
+SQL> BEGIN
+  2  DBMS_OUTPUT_PUT_LINE("Hola mundo");
+  3  END;
+  4  /
+DBMS_OUTPUT_PUT_LINE("Hola mundo");
+                      *
+ERROR at line 2:
+ORA-06550: line 2, column 23: 
+PLS-00201: identifier 'Hola mundo' must be declared 
+ORA-06550: line 2, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE("Hola mundo");
+  3  END;
+  4  /
+DBMS_OUTPUT.PUT_LINE("Hola mundo");
+                      *
+ERROR at line 2:
+ORA-06550: line 2, column 23: 
+PLS-00201: identifier 'Hola mundo' must be declared 
+ORA-06550: line 2, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('Hola mundo');
+  3  END;
+  4  /
+Hola mundo                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> SAVE HOLAMUNDO
+Created file HOLAMUNDO.sql
+SQL> GET HOLAMUNDO.sql
+  1  BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('Hola mundo');
+  3* END;
+SQL> RUN
+  1  BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('Hola mundo');
+  3* END;
+Hola mundo                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> CREATE PROCEDURE HOLAMUNDO
+  2  IS
+  3  BEGIN
+  4  DBMS_OUTPUT.PUT_LINE('Hola mundo');
+  5  END;
+  6  /
+
+Procedure created.
+
+SQL> si no hay errores de sintaxis almacena en la base de datos el procedimimiento
+SP2-0734: unknown command beginning "si no hay ..." - rest of line ignored.
+SQL> si hay errores puedes hacer SHOW ERROR
+SP2-0734: unknown command beginning "si hay err..." - rest of line ignored.
+SQL> para eliminar el procedimiento seria DROP PROCEDURE
+SP2-0734: unknown command beginning "para elimi..." - rest of line ignored.
+SQL> almacenado en el diccinoario de la base de datos, no en el diccionario
+SP2-0734: unknown command beginning "almacenado..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> CALL HOLAMUNDO();
+Hola mundo                                                                      
+
+Call completed.
+
+SQL> DROP PROCEDURE HOLAMUNDO
+  2  ;
+
+Procedure dropped.
+
+SQL> CREATE FUNCTION DOBLE(X NUMBER) RETURN NUMBER
+  2  IS
+  3  BEGIN
+  4  RETURN 2*X;
+  5  END
+  6  ;
+  7  /
+
+Function created.
+
+SQL> CALL DOBLE(6);
+CALL DOBLE(6)
+     *
+ERROR at line 1:
+ORA-06576: not a valid function or procedure name 
+
+
+SQL> BEGIN
+  2  
+  3  
+  4  
+  5  
+  6  
+  7  
+  8  
+  9  
+ 10  
+ 11  
+ 12  
+ 13  
+ 14  
+SQL> BEGIN
+  2  DOBLE(4);
+  3  END;
+  4  /
+DOBLE(4);
+*
+ERROR at line 2:
+ORA-06550: line 2, column 1: 
+PLS-00221: 'DOBLE' is not a procedure or is undefined 
+ORA-06550: line 2, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE(TO_CHAR(DOBLE(4));
+  3  END;
+  4  /
+DBMS_OUTPUT.PUT_LINE(TO_CHAR(DOBLE(4));
+                                      *
+ERROR at line 2:
+ORA-06550: line 2, column 39: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+. ( ) , * % & = - + < / > at in is mod remainder not rem => 
+<an exponent (**)> <> or != or ~= >= <= <> and or default 
+like like2 like4 likec as between from using || multiset 
+member submultiset 
+The symbol ")" was substituted for ";" to continue. 
+
+
+SQL> DROP DOBLE(X NUMBER);
+DROP DOBLE(X NUMBER)
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> DROP DOBLE;
+DROP DOBLE
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> CREATE FUNCTION DOBLE (X NUMBER) RETURN NUMBER
+  2  IS
+  3  BEGIN
+  4  RETURN X*2;
+  5  END;
+  6  /
+CREATE FUNCTION DOBLE (X NUMBER) RETURN NUMBER
+                *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> DROP FUNCTION DOBLE;
+
+Function dropped.
+
+SQL> CREATE FUNCTION DOBLE (X NUMBER) RETURN NUMBER
+  2  IS
+  3  BEGIN
+  4  RETURN X*2;
+  5  END;
+  6  /
+
+Function created.
+
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE(TO_CHAR(DOBLE(4));
+  3  END;
+  4  /
+DBMS_OUTPUT.PUT_LINE(TO_CHAR(DOBLE(4));
+                                      *
+ERROR at line 2:
+ORA-06550: line 2, column 39: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+. ( ) , * % & = - + < / > at in is mod remainder not rem => 
+<an exponent (**)> <> or != or ~= >= <= <> and or default 
+like like2 like4 likec as between from using || multiset 
+member submultiset 
+The symbol ")" was substituted for ";" to continue. 
+
+
+SQL> SELECT DOUBLE(4)
+  2  FROM DUAL;
+SELECT DOUBLE(4)
+       *
+ERROR at line 1:
+ORA-00904: "DOUBLE": invalid identifier 
+
+
+SQL> SELECT DOBLE(4)
+  2  FROM DUAL;
+
+  DOBLE(4)                                                                      
+----------                                                                      
+         8                                                                      
+
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE(TO_CHAR(DOBLE(4)),
+  3  END;
+  4  /
+END;
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00103: Encountered the symbol "END" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternative 
+
+
+SQL> VARIABLE X NUMBER
+SQL> CALL DOBLE(4) INTO :X;
+
+Call completed.
+
+SQL> PRINT X
+
+         X                                                                      
+----------                                                                      
+         8                                                                      
+
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE(TO_CHAR(DOBLE(4)));
+  3  END;
+  4  /
+8                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> DROP FUNCTION DOBLE;
+
+Function dropped.
+
+SQL> CREATE FUNCTION DOBLE (X NUMBER) RETURN NUMBER
+  2  IS
+  3  RESULTADO NUMBER;
+  4  BEGIN
+  5  RESULTADO = 2*X;
+  6  RETURN RESULTADO;
+  7  END;
+  8  /
+
+Warning: Function created with compilation errors.
+
+SQL> SHOW ERRORS
+Errors for FUNCTION DOBLE:
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+5/11     PLS-00103: Encountered the symbol "=" when expecting one of the        
+         following:                                                             
+         := . ( @ % ;                                                           
+         The symbol ":= was inserted before "=" to continue.                    
+                                                                                
+SQL> DROP FUNCTION DOBLE;
+
+Function dropped.
+
+SQL> CREATE FUNCTION DOBLE (X NUMBER) RETURN NUMBER
+  2  IS
+  3  RESULTADO NUMBER;
+  4  BEGIN
+  5  RESULTADO := 2*X;
+  6  RETURN RESULTADO;
+  7  END;
+  8  /
+
+Function created.
+
+SQL> SELECT DOBLE(4)
+  2  FROM DUAL;
+
+  DOBLE(4)                                                                      
+----------                                                                      
+         8                                                                      
+
+SQL> CREATE PROCEDURE TRIPLE (X IN NUMBER, Y OUT NUMBER)
+  2  IS
+  3  BEGIN
+  4  Y = 3*X;
+  5  END;
+  6  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> DROP PROCEDURE TRIPLE
+  2  ;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE TRIPLE (X IN NUMBER, Y OUT NUMBER)
+  2  IS
+  3  BEGIN
+  4  Y := 3*X;
+  5  END;
+  6  /
+
+Procedure created.
+
+SQL> SELECT TRIPLE(5)
+  2  FROM DUAL;
+SELECT TRIPLE(5)
+       *
+ERROR at line 1:
+ORA-00904: "TRIPLE": invalid identifier 
+
+
+SQL> SELECT P, CAT
+  2  FROM PROFESOR
+  3  WHERE DNI = 1111;
+
+P                                                            CAT                
+------------------------------------------------------------ -----              
+JUAN                                                         CU                 
+
+SQL> DECLARE
+  2  
+  3  
+  4  
+  5  :
+  6  ;
+  7  ;
+  8  ;
+  9  /
+:
+*
+ERROR at line 5:
+ORA-06550: line 5, column 1: 
+PLS-00103: Encountered the symbol " 
+" when expecting one of the following: 
+begin function pragma procedure subtype type <an identifier> 
+<a double-quoted delimited-identifier> current cursor delete 
+exists prior 
+
+
+SQL> DESCRIBE PROFESOR;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNI                                       NOT NULL NUMBER(8)
+ P                                                  VARCHAR2(60)
+ CAR                                                NUMBER(3)
+ CAT                                                VARCHAR2(5)
+
+SQL> DECLARE
+  2  V_P PROFESOR.T %TYPE
+  3  V_CAT PROFESOR.CAT %TYPE
+  4  
+  5  
+  6  ;
+  7  /
+V_CAT PROFESOR.CAT %TYPE
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00103: Encountered the symbol "V_CAT" when expecting one of the following: 
+:= ( ; not null range default character 
+The symbol ";" was substituted for "V_CAT" to continue. 
+ORA-06550: line 6, column 1: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+begin function pragma procedure subtype type <an identifier> 
+<a double-quoted delimited-identifier> current cursor delete 
+exists prior 
+
+
+SQL> DECLARE
+  2  V_P PROFESOR.T % TYPE;
+  3  V_CAT PROFESOR.CAT % TYPE;
+  4  BEGIN
+  5  SELECT P,CAT
+  6  INTO V_P,V_CAT
+  7  FROM PROFESOR
+  8  WHERE DNI = 1111;
+  9  DBM
+ 10  
+ 11  
+ 12  /
+DECLARE
+*
+ERROR at line 1:
+ORA-06550: line 11, column 0: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+:= . ( @ % ; 
+
+
+SQL> DECLARE
+  2  V_P PROFESOR.P % TYPE
+  3  V_CAT PROFESOR.CAT % TYPE
+  4  
+  5  
+  6  /
+V_CAT PROFESOR.CAT % TYPE
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00103: Encountered the symbol "V_CAT" when expecting one of the following: 
+:= ( ; not null range default character 
+The symbol ";" was substituted for "V_CAT" to continue. 
+ORA-06550: line 5, column 0: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+:= ( ; not null range default character 
+
+
+SQL> DECLARE
+  2  V_P PROFESOR.P % TYPE
+  3  V_CAT PROFESOR.CAT %
+  4  
+  5  
+  6  
+  7  /
+V_CAT PROFESOR.CAT %
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00103: Encountered the symbol "V_CAT" when expecting one of the following: 
+:= ( ; not null range default character 
+The symbol ";" was substituted for "V_CAT" to continue. 
+ORA-06550: line 6, column 0: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+type <an identifier> <a double-quoted delimited-identifier> 
+
+
+SQL> DECLARE
+  2  V_P PROFESOR.P % TYPE;
+  3  V_CAT PROFESOR.CAT % TYPE;
+  4  BEGIN
+  5  SELECT P,CAT
+  6  INTO V_P,V_CAT
+  7  FRP, `RPFESPR
+  8  /
+FRP, `RPFESPR
+*
+ERROR at line 7:
+ORA-06550: line 6, column 16: 
+PL/SQL: ORA-00923: FROM keyword not found where expected 
+ORA-06550: line 5, column 1: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 7, column 13: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+; 
+
+
+SQL> CREATE PROCEDURE DATOP(V_DNI PROFESOR.DNI % TYPE, V_P OUT PROFESOR.P % TYPE, V_CAT OUT PROFESOR.CAT % TYPE)
+  2  IS
+  3  BEGIN
+  4  SELECT P,CAT
+  5  INTO V_P,V_CAT
+  6  FROM PROFESOR
+  7  WHERE DNI = V_DNI;
+  8  END;
+  9  /
+
+Procedure created.
+
+SQL> BEGIN
+  2  DATOP(1111,V_P,V_CAT)
+  3  DBMS_OUTPUT.PUT_LINE(V_P);
+  4  END;
+  5  /
+DBMS_OUTPUT.PUT_LINE(V_P);
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00103: Encountered the symbol "DBMS_OUTPUT" when expecting one of the 
+following: 
+:= . ( % ; 
+The symbol ":=" was substituted for "DBMS_OUTPUT" to continue. 
+
+
+SQL> BEGIN
+  2  DATOP(1111,V_P,V_CAT);
+  3  DBMS_OUTPUT.PUT_LINE(V_P);
+  4  END;
+  5  /
+DATOP(1111,V_P,V_CAT);
+           *
+ERROR at line 2:
+ORA-06550: line 2, column 12: 
+PLS-00201: identifier 'V_P' must be declared 
+ORA-06550: line 2, column 1: 
+PL/SQL: Statement ignored 
+ORA-06550: line 3, column 22: 
+PLS-00201: identifier 'V_P' must be declared 
+ORA-06550: line 3, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> DECLARE
+  2  V_P PROFESOR.P % TYPE
+  3  V_CAT PROFESOR.CAT % TYPE
+  4  BEGIN
+  5  DATOP(1111,V_P,V_CAT);
+  6  DBMS_OUTPUT.PUT_LINE(V_P);
+  7  END;
+  8  /
+V_CAT PROFESOR.CAT % TYPE
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00103: Encountered the symbol "V_CAT" when expecting one of the following: 
+:= ( ; not null range default character 
+The symbol ";" was substituted for "V_CAT" to continue. 
+ORA-06550: line 4, column 1: 
+PLS-00103: Encountered the symbol "BEGIN" when expecting one of the following: 
+:= ( ; not null range default character 
+The symbol ";" was substituted for "BEGIN" to continue. 
+
+
+SQL> DECLARE
+  2  V_P PROFESOR.P % TYPE;
+  3  V_CAT PROFESOR.CAT % TYPE;
+  4  BEGIN
+  5  DATOP(1111,V_P,V_CAT);
+  6  DBMS_OUTPUT.PUT_LINE(V_P);
+  7  END;
+  8  /
+JUAN                                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF
