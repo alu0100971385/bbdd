@@ -540,3 +540,5 @@ JUAN
 PL/SQL procedure successfully completed.
 
 SQL> SPOOL OFF
+SQL> SET SERVEROUTPUT ON
+SQL> SPOOL OFF
