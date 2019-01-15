@@ -542,3 +542,531 @@ PL/SQL procedure successfully completed.
 SQL> SPOOL OFF
 SQL> SET SERVEROUTPUT ON
 SQL> SPOOL OFF
+SQL> DECLARE
+  2  final DEPARTAMENTO.D%TYPE;
+  3  auxiliar NUMBER;
+  4  CURSOR dep
+  5  IS SELECT D
+  6  FROM DEPARTAMENTO,AREA
+  7  ORDER BY COUNT(CAR)DESC;
+  8  BEGIN
+  9  OPEN dep;
+ 10  LOOP
+ 11  FETCH dep INTO final
+ 12  auxiliar:=auxiliar+1;
+ 13  IF auxiliar=3 THEN
+ 14  DBMS_OUTPUT.PUT_LINE('NOMBRE' || final);
+ 15  END IF;
+ 16  EXIT WHEN auxiliar == 3;
+ 17  END LOOP;
+ 18  CLOSE dep;
+ 19  END;
+ 20  /
+auxiliar:=auxiliar+1;
+*
+ERROR at line 12:
+ORA-06550: line 12, column 1: 
+PLS-00103: Encountered the symbol "AUXILIAR" when expecting one of the 
+following: 
+. ( , % ; limit 
+The symbol ";" was substituted for "AUXILIAR" to continue. 
+ORA-06550: line 16, column 21: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+( - + all case mod new null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue any avg count current max min prior some sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+
+
+SQL> DECLARE
+  2  final DEPARTAMENTO.D%TYPE;
+  3  auxiliar NUMBER;
+  4  CURSOR dep
+  5  IS SELECT D
+  6  FROM DEPARTAMENTO,AREA
+  7  ORDER BY COUNT(CAR) DESC;
+  8  BEGIN
+  9  OPEN dep;
+ 10  LOOP
+ 11  FETCH dep INTO final;
+ 12  auxiliar := auxiliar + 1;
+ 13  IF auxiliar == 3 THEN
+ 14  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 15  END IF;
+ 16  EXIT WHEN auxiliar == 3;
+ 17  END LOOP;
+ 18  CLOSE dep;
+ 19  END;
+ 20  /
+IF auxiliar == 3 THEN
+             *
+ERROR at line 13:
+ORA-06550: line 13, column 14: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+( - + all case mod new null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue any avg count current max min prior some sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternative 
+ORA-06550: line 16, column 21: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+( - + all case mod new null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue any avg count current max min prior some sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+
+
+SQL> DECLARE
+  2  final DEPARTAMENTO.D%TYPE;
+  3  auxiliar NUMBER;
+  4  CURSOR dep
+  5  IS SELECT D
+  6  FROM DEPARTAMENTO NATURAL JOIN AREA
+  7  GROUP BY D
+  8  ORDER BY COUNT(CAR) DESC;
+  9  BEGIN
+ 10  OPEN dep;
+ 11  LOOP
+ 12  FETCH dep INTO final;
+ 13  auxiliar:=auxiliar+1;
+ 14  IF auxiliar = 3 THEN
+ 15  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 16  END IF;
+ 17  EXIT WHEN auxiliar = 3;
+ 18  END LOOP;
+ 19  CLOSE dep;
+ 20  END;
+ 21  /
+DECLARE
+*
+ERROR at line 1:
+ORA-01013: user requested cancel of current operation 
+
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL> .
+SQL> ;
+  1  DECLARE
+  2  final DEPARTAMENTO.D%TYPE;
+  3  auxiliar NUMBER;
+  4  CURSOR dep
+  5  IS SELECT D
+  6  FROM DEPARTAMENTO NATURAL JOIN AREA
+  7  GROUP BY D
+  8  ORDER BY COUNT(CAR) DESC;
+  9  BEGIN
+ 10  OPEN dep;
+ 11  LOOP
+ 12  FETCH dep INTO final;
+ 13  auxiliar:=auxiliar+1;
+ 14  IF auxiliar = 3 THEN
+ 15  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 16  END IF;
+ 17  EXIT WHEN auxiliar = 3;
+ 18  END LOOP;
+ 19  CLOSE dep;
+ 20* END;
+SQL> 
+SQL> 
+SQL> DECLARE
+  2  final DEPARTAMENTO.D%TYPE;
+  3  auxiliar NUMBER:=0;
+  4  CURSOR dep
+  5  IS SELECT D
+  6  FROM DEPARTAMENTO NATURAL JOIN AREA
+  7  GROUP BY D
+  8  ORDER BY COUNT(CAR) DESC;
+  9  BEGIN
+ 10  OPEN dep;
+ 11  LOOP
+ 12  FETCH dep INTO final;
+ 13  auxiliar:=auxiliar+1;
+ 14  IF auxiliar = 3 THEN
+ 15  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 16  END IF;
+ 17  EXIT WHEN auxiliar = 4;
+ 18  END LOOP;
+ 19  CLOSE dep;
+ 20  END;
+ 21  /
+
+PL/SQL procedure successfully completed.
+
+SQL> RUN;
+  1  DECLARE
+  2  final DEPARTAMENTO.D%TYPE;
+  3  auxiliar NUMBER:=0;
+  4  CURSOR dep
+  5  IS SELECT D
+  6  FROM DEPARTAMENTO NATURAL JOIN AREA
+  7  GROUP BY D
+  8  ORDER BY COUNT(CAR) DESC;
+  9  BEGIN
+ 10  OPEN dep;
+ 11  LOOP
+ 12  FETCH dep INTO final;
+ 13  auxiliar:=auxiliar+1;
+ 14  IF auxiliar = 3 THEN
+ 15  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 16  END IF;
+ 17  EXIT WHEN auxiliar = 4;
+ 18  END LOOP;
+ 19  CLOSE dep;
+ 20* END;
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  final DEPARTAMENTO.D%TYPE;
+  3  auxiliar NUMBER:=0;
+  4  CURSOR dep
+  5  IS SELECT D
+  6  FROM DEPARTAMENTO NATURAL JOIN AREA
+  7  GROUP BY D
+  8  ORDER BY COUNT(CAR) DESC;
+  9  BEGIN
+ 10  OPEN dep;
+ 11  LOOP
+ 12  FETCH dep INTO final;
+ 13  auxiliar:=auxiliar+1;
+ 14  IF auxiliar = 3 THEN
+ 15  DBMS_OUTPUT.PUTLINE('NOMBRE: ' || final);
+ 16  END IF;
+ 17  EXIT WHEN auxiliar > 3;
+ 18  END LOOP;
+ 19  CLOSE dep;
+ 20  END;
+ 21  /
+DBMS_OUTPUT.PUTLINE('NOMBRE: ' || final);
+            *
+ERROR at line 15:
+ORA-06550: line 15, column 13: 
+PLS-00302: component 'PUTLINE' must be declared 
+ORA-06550: line 15, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  final DEPARTAMENTO.D%TYPE;
+  3  auxiliar NUMBER:=0;
+  4  CURSOR dep
+  5  IS SELECT D
+  6  FROM DEPARTAMENTO NATURAL JOIN AREA
+  7  GROUP BY D
+  8  ORDER BY COUNT(CAR) DESC;
+  9  BEGIN
+ 10  OPEN dep;
+ 11  LOOP
+ 12  FETCH dep INTO final;
+ 13  auxiliar:=auxiliar+1;
+ 14  IF auxiliar = 3 THEN
+ 15  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 16  END IF
+ 17  ;
+ 18  EXIT WHEN auxiliar = 4;
+ 19  END LOOP;
+ 20  CLOSE dep;
+ 21  END;
+ 22  /
+NOMBRE: MATEMATICA FUNDAMENTAL                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT D
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA
+  3  GROUP BY D
+  4  ORDER BY COUNT(CAR) DESC;
+
+D                                                                               
+------------------------------------------------------------                    
+ANALISIS MATEMATICO                                                             
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+MATEMATICA FUNDAMENTAL                                                          
+ASTROFISICA                                                                     
+
+SQL> SELECT AR
+  2  FROM DEPARTAMENTO,AREA
+  3  WHERE CD == 1;
+WHERE CD == 1
+          *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT AR
+  2  FROM DEPARTAMENTO,AREA
+  3  WHERE CD = 1;
+WHERE CD = 1
+      *
+ERROR at line 3:
+ORA-00918: column ambiguously defined 
+
+
+SQL> SELECT AR
+  2  FROM DEPARTAMENTO,AREA
+  3  WHERE CD == 2;
+WHERE CD == 2
+          *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT AR
+  2  FROM DEPARTAMENTO,AREA
+  3  WHERE CD == 1
+  4  GROUP BY CD;
+WHERE CD == 1
+          *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT AR
+  2  FROM DEPARTAMENTO,AREA
+  3  WHERE (CD == 1) AND (DEPARTAMENTO.CD == AREA.CD)
+  4  ;
+WHERE (CD == 1) AND (DEPARTAMENTO.CD == AREA.CD)
+          *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT AR
+  2  FROM DEPARTAMENTO,AREA
+  3  WHERE DEPARTAMENTO.CD == 1 AND DEPARTAMENTO.CD == AREA.CD;
+WHERE DEPARTAMENTO.CD == 1 AND DEPARTAMENTO.CD == AREA.CD
+                       *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT AR
+  2  FROM DEPARTAMENTO,AREA
+  3  WHERE DEPARTAMENTO.CD = 1 AND DEPARTAMENTO.CD = AREA.CD;
+
+AR                                                                              
+------------------------------------------------------------                    
+ANALISIS MATEMATICO                                                             
+DIDACTICA DE LA MATEMATICA                                                      
+MATEMATICA APLICADA                                                             
+
+SQL> CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+  2  final AREA.AR%TYPE;
+  3  CURSOR ar IS
+  4  SELECT AREA
+  5  FROM DEPARTAMENTO,AREA
+  6  WHERE DEPARTAMENTO.CD =
+  7  
+  8  
+  9  .
+SQL> CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+  2  final AREA.AR%TYPE;
+  3  CURSOR ar IS
+  4  SELECT AREA
+  5  
+  6  
+  7  .
+SQL> CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+  2  final AREA.AR%TYPE;
+  3  CURSOR ar IS
+  4  SELECT AR
+  5  FROM AREA
+  6  WHERE CD = COD;
+  7  BEGIN
+  8  OPEN ar;
+  9  LOOP
+ 10  FETCH ar IN final;
+ 11  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 12  EXIT WHEN ar%NOTFOUND;
+ 13  END LOOP;
+ 14  CLOSE ar;
+ 15  END;
+ 16  /C
+ 17  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+  2  final AREA.AR%TYPE;
+  3  CURSOR ar IS
+  4  SELECT AR
+  5  FROM AREA
+  6  WHERE CD = COD;
+  7  BEGIN
+  8  OPEN ar;
+  9  LOOP
+ 10  FETCH ar IN final;
+ 11  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 12  EXIT WHEN ar%NOTFOUND;
+ 13  END LOOP;
+ 14  CLOSE ar;
+ 15  END;
+ 16  /
+CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+                 *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> DROP areas;
+DROP areas
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> DROP PROCEDURE areas;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+  2  final AREA.AR%TYPE;
+  3  CURSOR ar IS
+  4  SELECT AR
+  5  FROM AREA
+  6  WHERE CD = COD;
+  7  BEGIN
+  8  OPEN ar;
+  9  LOOP
+ 10  FETCH ar INTO final;
+ 11  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 12  EXIT WHEN ar%NOTFOUND;
+ 13  END LOOP;
+ 14  CLOSE ar;
+ 15  END;
+ 16  /
+
+Procedure created.
+
+SQL> RUN;
+  1  CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+  2  final AREA.AR%TYPE;
+  3  CURSOR ar IS
+  4  SELECT AR
+  5  FROM AREA
+  6  WHERE CD = COD;
+  7  BEGIN
+  8  OPEN ar;
+  9  LOOP
+ 10  FETCH ar INTO final;
+ 11  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 12  EXIT WHEN ar%NOTFOUND;
+ 13  END LOOP;
+ 14  CLOSE ar;
+ 15* END;
+CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+                 *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> execute areas;
+BEGIN areas; END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00306: wrong number or types of arguments in call to 'AREAS' 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> execute areas(1);
+NOMBRE: ANALISIS MATEMATICO                                                     
+NOMBRE: DIDACTICA DE LA MATEMATICA                                              
+NOMBRE: MATEMATICA APLICADA                                                     
+NOMBRE: MATEMATICA APLICADA                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> execute areas(2);
+NOMBRE: ASTRONOMIA Y ASTROFISICA                                                
+NOMBRE: ASTRONOMIA Y ASTROFISICA                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> execute areas(3);
+NOMBRE: CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                    
+NOMBRE: ESTADISTICA E INVESTIGACION OPERATIVA                                   
+NOMBRE: LENGUAJES Y SISTEMAS INFORMATICOS                                       
+NOMBRE: LENGUAJES Y SISTEMAS INFORMATICOS                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> DROP PROCEDURE areas;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+  2  final AREA.AR%TYPE;
+  3  CURSOR ar IS
+  4  SELECT AR
+  5  FROM AREA
+  6  WHERE CD = COD;
+  7  BEGIN
+  8  OPEN ar;
+  9  LOOP
+ 10  FETCH ar INTO final;
+ 11  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 12  
+ 13  
+ 14  
+ 15  
+ 16  .
+SQL> CREATE PROCEDURE areas(COD IN DEPARTAMENTO.CD%TYPE) IS
+  2  final AREA.AR%TYPE;
+  3  CURSOR ar IS
+  4  SELECT AR
+  5  FROM AREA
+  6  WHERE CD = COD;
+  7  BEGIN
+  8  OPEN ar;
+  9  LOOP
+ 10  FETCH ar INTO final;
+ 11  EXIT WHEN ar%NOTFOUND;
+ 12  DBMS_OUTPUT.PUT_LINE('NOMBRE: ' || final);
+ 13  END LOOP;
+ 14  CLOSE ar;
+ 15  END;
+ 16  /
+
+Procedure created.
+
+SQL> execute areas(1);
+NOMBRE: ANALISIS MATEMATICO                                                     
+NOMBRE: DIDACTICA DE LA MATEMATICA                                              
+NOMBRE: MATEMATICA APLICADA                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> execute areas(2);
+NOMBRE: ASTRONOMIA Y ASTROFISICA                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> execute areas(3);
+NOMBRE: CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                    
+NOMBRE: ESTADISTICA E INVESTIGACION OPERATIVA                                   
+NOMBRE: LENGUAJES Y SISTEMAS INFORMATICOS                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> execute areas(4);
+NOMBRE: ALGEBRA                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF;
